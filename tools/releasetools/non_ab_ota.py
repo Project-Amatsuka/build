@@ -211,6 +211,35 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   script.Print("Target: {}".format(target_info.fingerprint))
 
+  # Get build information
+  android_version = target_info.GetBuildProp("ro.build.version.release")
+  build_date = target_info.GetBuildProp("ro.build.date")
+  security_patch = target_info.GetBuildProp("ro.build.version.security_patch")
+
+  # Print Ascii and build information
+  script.Print("===================================================")
+  script.Print("┌─────────────────────────────────────────────────┐")
+  script.Print("│  _   _                                          │")
+  script.Print("│ | \ | |                                         │")
+  script.Print("│ |  \| |_   _  __ _ _ __  _ __   __ _ ___ _   _  │")
+  script.Print("│ | . ` | | | |/ _` | '_ \| '_ \ / _` / __| | | | │")
+  script.Print("│ | |\  | |_| | (_| | | | | |_) | (_| \__ \ |_| | │")
+  script.Print("│ |_| \_|\__, |\__,_|_| |_| .__/ \__,_|___/\__,_| │")
+  script.Print("│     /\  __/ |      | |  | |    (_)   | |        │")
+  script.Print("│    /  \|___/__   __| |_ |_|___  _  __| |        │")
+  script.Print("│   / /\ \ | '_ \ / _` | '__/ _ \| |/ _` |        │")
+  script.Print("│  / ____ \| | | | (_| | | | (_) | | (_| |        │")
+  script.Print("│ /_/    \_\_| |_|\__,_|_|  \___/|_|\__,_|        │")
+  script.Print("│                                                 │")
+  script.Print("│─────────────────────────────────────────────────│")
+  script.Print("│              Nyanpasu Android 13                │")
+  script.Print("└─────────────────────────────────────────────────┘")
+  script.Print("---------------------------------------------------")
+  script.Print("Android version: %s" %(android_version))
+  script.Print("Security patch: %s" %(security_patch))
+  script.Print("Build date: %s" %(build_date))
+  script.Print("===================================================")
+
   device_specific.FullOTA_InstallBegin()
 
   # All other partitions as well as the data wipe use 10% of the progress, and
